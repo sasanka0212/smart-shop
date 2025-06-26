@@ -46,9 +46,5 @@ class GlobalVariables {
       'title': 'Fashion',
       'image': 'assets/images/fashion.jpeg',
     },
-    {
-      'title': 'Essentials',
-      'image': 'assets/images/essentials.jpeg',
-    },
   ];
 }

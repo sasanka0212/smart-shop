@@ -26,6 +26,50 @@ class _DealOfDayState extends State<DealOfDay> {
             fit: BoxFit.fitHeight,
           ),
         ),
+        Container(
+          alignment: Alignment.topLeft,
+          padding: EdgeInsets.only(top: 5, left: 10),
+          child: Text("Rs 83,999",
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.w600,
+            ),
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+          ),
+        ),
+        Container(
+          alignment: Alignment.topLeft,
+          padding: EdgeInsets.only(top: 5, left: 10, bottom: 5),
+          child: Text("MacBook Air M3 2024 Edition",
+            style: TextStyle(
+              fontSize: 14,
+            ),
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+          ),
+        ),
+        SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Image.network('https://www.apple.com/newsroom/images/product/mac/standard/Apple_MacBook-Pro_14-16-inch_10182021_big.jpg.large.jpg', fit: BoxFit.fitWidth, width: 100, height: 100,),
+              Image.network('https://www.apple.com/newsroom/images/product/mac/standard/Apple_MacBook-Pro_14-16-inch_10182021_big.jpg.large.jpg', fit: BoxFit.fitWidth, width: 100, height: 100,),
+              Image.network('https://www.apple.com/newsroom/images/product/mac/standard/Apple_MacBook-Pro_14-16-inch_10182021_big.jpg.large.jpg', fit: BoxFit.fitWidth, width: 100, height: 100,),
+              Image.network('https://www.apple.com/newsroom/images/product/mac/standard/Apple_MacBook-Pro_14-16-inch_10182021_big.jpg.large.jpg', fit: BoxFit.fitWidth, width: 100, height: 100,),
+            ],
+          ),
+        ),
+        Container(
+          alignment: Alignment.topLeft,
+          padding: EdgeInsets.symmetric(vertical: 15).copyWith(left: 15),
+          child: Text("See All Deals",
+            style: TextStyle(
+              color: Colors.cyan[800],
+            ),
+          ),
+        ),
       ],
     );
   }
