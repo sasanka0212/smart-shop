@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const ratingSchema = require('./rating');
 
 const productSchema = mongoose.Schema({
     name: {
@@ -28,10 +29,11 @@ const productSchema = mongoose.Schema({
     category: {
         type: String,
         required: true
-    }
-    // ratings (future work)
+    },
+    ratings: [ratingSchema]
 });
 
 const Product = mongoose.model("Product", productSchema);
 
-module.exports = Product;
+// to use that we export two things in destructured format
+module.exports = { Product, productSchema };

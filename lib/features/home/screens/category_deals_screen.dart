@@ -1,6 +1,7 @@
 import 'package:amazon/common/widgets/loader.dart';
 import 'package:amazon/constraints/global_variables.dart';
-import 'package:amazon/home/services/home_services.dart';
+import 'package:amazon/features/home/services/home_services.dart';
+import 'package:amazon/features/product_details/screens/product_details_screen.dart';
 import 'package:amazon/models/product.dart';
 import 'package:flutter/material.dart';
 
@@ -46,6 +47,10 @@ class _CategoryDealsScreenState extends State<CategoryDealsScreen>
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(60),
         child: AppBar(
+          leading: IconButton(
+            onPressed: () => Navigator.pop(context),
+            icon: Icon(Icons.arrow_back_ios),
+          ),
           // I use flexible space to add liner-gradient color to appbar
           centerTitle: true,
           flexibleSpace: Container(
@@ -81,29 +86,46 @@ class _CategoryDealsScreenState extends State<CategoryDealsScreen>
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (context, index) {
                       final product = products![index];
-                      return Column(
-                        children: [
-                          SizedBox(
-                            height: 130,
-                            child: DecoratedBox(
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                  color: Colors.black12,
-                                  width: 0.5,
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.pushNamed(
+                            context,
+                            ProductDetailsScreen.routeName,
+                            arguments: product,
+                          );
+                        },
+                        child: Column(
+                          children: [
+                            SizedBox(
+                              height: 130,
+                              child: DecoratedBox(
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                    color: Colors.black12,
+                                    width: 0.5,
+                                  ),
+                                ),
+                                child: Padding(
+                                  padding: EdgeInsets.all(10),
+                                  child: Image.network(product.images[0]),
                                 ),
                               ),
-                              child: Padding(
-                                padding: EdgeInsets.all(10),
-                                child: Image.network(product.images[0]),
+                            ),
+                            Container(
+                              padding: EdgeInsets.only(
+                                top: 5,
+                                left: 0,
+                                right: 15,
+                              ),
+                              alignment: Alignment.topLeft,
+                              child: Text(
+                                product.name,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
                               ),
                             ),
-                          ),
-                          Container(
-                            padding: EdgeInsets.only(top: 5, left: 0, right: 15),
-                            alignment: Alignment.topLeft,
-                            child: Text(product.name, maxLines: 1, overflow: TextOverflow.ellipsis,),
-                          ),
-                        ],
+                          ],
+                        ),
                       );
                     },
                   ),

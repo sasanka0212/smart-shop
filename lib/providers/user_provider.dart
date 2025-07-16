@@ -10,6 +10,7 @@ class UserProvider extends ChangeNotifier {
     address: '',
     type: '',
     token: '',
+    cart: [],
   );
 
   // use a getter method to access the private variable
@@ -19,5 +20,10 @@ class UserProvider extends ChangeNotifier {
     _user = User.fromJson(user);
     // notify about user value change
     notifyListeners();
+  }
+
+  void setUserFromModel(User user) {
+    _user = user;
+    ChangeNotifier();
   }
 }

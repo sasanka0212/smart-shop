@@ -1,25 +1,27 @@
+import 'package:amazon/common/widgets/custom_button.dart';
 import 'package:amazon/constraints/global_variables.dart';
-import 'package:amazon/home/widgets/address_box.dart';
-import 'package:amazon/home/widgets/carousel_image.dart';
-import 'package:amazon/home/widgets/deal_of_day.dart';
-import 'package:amazon/home/widgets/top_categories.dart';
+import 'package:amazon/features/cart/widgets/cart_subtotal.dart';
+import 'package:amazon/features/home/widgets/address_box.dart';
+import 'package:amazon/features/search/screens/search_screen.dart';
 import 'package:amazon/providers/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class HomeScreen extends StatefulWidget {
-  static const String routeName = '/home';
-  const HomeScreen({super.key});
+class CartScreen extends StatefulWidget {
+  const CartScreen({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<CartScreen> createState() => _CartScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _CartScreenState extends State<CartScreen> {
+  navigateToSearchScreen(String query) {
+    Navigator.pushNamed(context, SearchScreen.routeName, arguments: query);
+  }
+
   @override
   Widget build(BuildContext context) {
-    final user = Provider.of<UserProvider>(context).user;
-
+    final user = context.watch<UserProvider>().user;
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(60),
@@ -40,7 +42,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: Material(
                     elevation: 1,
                     borderRadius: BorderRadius.circular(7),
-                    child: TextField(
+                    child: TextFormField(
+                      onFieldSubmitted: (query) =>
+                          navigateToSearchScreen(query),
                       decoration: InputDecoration(
                         prefixIcon: InkWell(
                           onTap: () {},
@@ -61,11 +65,13 @@ class _HomeScreenState extends State<HomeScreen> {
                           borderRadius: BorderRadius.all(Radius.circular(7)),
                         ),
                         enabledBorder: const OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: Colors.black38, width: 1),
+                          borderSide: BorderSide(
+                            color: Colors.black38,
+                            width: 1,
+                          ),
                           borderRadius: BorderRadius.all(Radius.circular(7)),
                         ),
-                        hintText: "Search Amazon.in",
+                        hintText: "Search SmartShop.in",
                         hintStyle: const TextStyle(
                           fontSize: 17,
                           fontWeight: FontWeight.w500,
@@ -79,29 +85,31 @@ class _HomeScreenState extends State<HomeScreen> {
                 color: Colors.transparent,
                 height: 42,
                 margin: const EdgeInsets.symmetric(horizontal: 10),
-                child: const Icon(
-                  Icons.mic,
-                  size: 25,
-                  color: Colors.black,
-                ),
+                child: const Icon(Icons.mic, size: 25, color: Colors.black),
               ),
             ],
           ),
         ),
       ),
-      body: const SingleChildScrollView(
+      body: SingleChildScrollView(
         child: Column(
           children: [
             AddressBox(),
-            SizedBox(
-              height: 10,
+            CartSubtotal(),
+            Padding(
+              padding: EdgeInsets.all(10),
+              child: CustomButton(
+                text: 'Proceed to Buy (${user.cart.length} items)', 
+                color: Colors.yellow[700],
+                textColor: Colors.black,
+                onTap: () {},
+              ),
             ),
-            TopCategories(),
-            SizedBox(
-              height: 10,
+            SizedBox(height: 15,),
+            Container(
+              color: Colors.black12.withAlpha(15),
+              height: 1,
             ),
-            CarouselImage(),
-            DealOfDay(),
           ],
         ),
       ),

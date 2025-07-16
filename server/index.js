@@ -4,8 +4,9 @@ const mongoose = require('mongoose');
 
 //import form other files (.js is not mandatory as an extension)
 const authRouter = require("./routes/auth");
-const adminRoute = require('./routes/admin');
+const adminRouter = require('./routes/admin');
 const productRouter = require('./routes/product');
+const userRouter = require('./routes/user');
 
 //INIT process
 const app = express();      
@@ -15,8 +16,9 @@ const DB = "mongodb+srv://sasanka:sasanka321@cluster0.d6gu8r4.mongodb.net/?retry
 //set middleware (Mostly format the data or update the data as per client request)
 app.use(express.json());
 app.use(authRouter);
-app.use(adminRoute);
+app.use(adminRouter);
 app.use(productRouter);
+app.use(userRouter);
 
 //set up mongoDB connection
 mongoose.connect(DB).then(

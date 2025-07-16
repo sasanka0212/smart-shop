@@ -4,7 +4,6 @@ import 'package:amazon/common/widgets/custom_button.dart';
 import 'package:amazon/common/widgets/custom_textfield.dart';
 import 'package:amazon/constraints/global_variables.dart';
 import 'package:amazon/constraints/utils.dart';
-import 'package:amazon/features/admin/screens/admin_screen.dart';
 import 'package:amazon/features/admin/services/admin_services.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dotted_border/dotted_border.dart';
