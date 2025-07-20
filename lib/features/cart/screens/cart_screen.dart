@@ -1,5 +1,7 @@
 import 'package:amazon/common/widgets/custom_button.dart';
 import 'package:amazon/constraints/global_variables.dart';
+import 'package:amazon/features/address/screens/address_screen.dart';
+import 'package:amazon/features/cart/widgets/cart_product.dart';
 import 'package:amazon/features/cart/widgets/cart_subtotal.dart';
 import 'package:amazon/features/home/widgets/address_box.dart';
 import 'package:amazon/features/search/screens/search_screen.dart';
@@ -19,9 +21,21 @@ class _CartScreenState extends State<CartScreen> {
     Navigator.pushNamed(context, SearchScreen.routeName, arguments: query);
   }
 
+  navigateToAddress(int total) {
+    Navigator.pushNamed(
+      context,
+      AddressScreen.routeName,
+      arguments: total.toString(),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final user = context.watch<UserProvider>().user;
+    int sum = 0;
+    user.cart
+        .map((e) => sum += e['quantity'] * e['product']['price'] as int)
+        .toList();
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(60),
@@ -91,27 +105,36 @@ class _CartScreenState extends State<CartScreen> {
           ),
         ),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            AddressBox(),
-            CartSubtotal(),
-            Padding(
-              padding: EdgeInsets.all(10),
-              child: CustomButton(
-                text: 'Proceed to Buy (${user.cart.length} items)', 
-                color: Colors.yellow[700],
-                textColor: Colors.black,
-                onTap: () {},
-              ),
+      body: Column(
+        children: [
+          AddressBox(),
+          CartSubtotal(),
+          Padding(
+            padding: EdgeInsets.all(10),
+            child: CustomButton(
+              text: 'Proceed to Buy (${user.cart.length} items)',
+              color: Colors.yellow[700],
+              textColor: Colors.black,
+              onTap: () => navigateToAddress(sum),
             ),
-            SizedBox(height: 15,),
-            Container(
-              color: Colors.black12.withAlpha(15),
-              height: 1,
+          ),
+          SizedBox(height: 15),
+          Container(color: Colors.black12.withAlpha(15), height: 1),
+          SizedBox(height: 5),
+          Expanded(
+            child: ListView.builder(
+              shrinkWrap: true,
+              physics: BouncingScrollPhysics(),
+              scrollDirection: Axis.vertical,
+              itemCount: user.cart.length,
+              itemBuilder: (context, index) {
+                return GestureDetector(
+                  child: CartProduct(index: index, context: context),
+                );
+              },
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

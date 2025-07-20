@@ -118,6 +118,8 @@ class _SearchScreenState extends State<SearchScreen> {
       ),
       body: searchProducts == null
           ? const Loader()
+          : searchProducts!.isEmpty
+          ? Center(child: Text('No Results Found', style: TextStyle(color: Colors.black26, fontWeight: FontWeight.bold),),)
           : Column(
               children: [
                 AddressBox(),
