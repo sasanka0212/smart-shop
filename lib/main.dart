@@ -5,6 +5,7 @@ import 'package:amazon/features/auth/screens/auth_screen.dart';
 import 'package:amazon/features/auth/services/auth_services.dart';
 import 'package:amazon/providers/user_provider.dart';
 import 'package:amazon/router.dart';
+import 'package:amazon/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -53,11 +54,12 @@ class _MyAppState extends State<MyApp> {
         ),
       ),
       onGenerateRoute: (settings) => generateRoute(settings),
-      home: Provider.of<UserProvider>(context).user.token.isNotEmpty
+      home: SplashScreen(),
+      /*Provider.of<UserProvider>(context).user.token.isNotEmpty
           ? Provider.of<UserProvider>(context).user.type == 'user' 
             ? const BottomBar()
             : const AdminScreen()
-          : const AuthScreen(),
+          : const AuthScreen()*/
     );
   }
 }

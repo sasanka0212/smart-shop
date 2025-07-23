@@ -1,5 +1,7 @@
 import 'package:amazon/constraints/global_variables.dart';
-import 'package:amazon/features/accounts/screens/posts_screen.dart';
+import 'package:amazon/features/admin/screens/analytics_screen.dart';
+import 'package:amazon/features/admin/screens/orders_screen.dart';
+import 'package:amazon/features/admin/screens/posts_screen.dart';
 import 'package:flutter/material.dart';
 
 class AdminScreen extends StatefulWidget {
@@ -15,12 +17,8 @@ class _AdminScreenState extends State<AdminScreen> {
   double bottomBarBorderWidth = 5;
   final List<Widget> _pages = [
     const PostsScreen(),
-    const Center(
-      child: Text("Analytics page"),
-    ),
-    const Center(
-      child: Text("Cart page"),
-    ),
+    AnalyticsScreen(),
+    OrdersScreen(),
   ];
   @override
   Widget build(BuildContext context) {
@@ -46,7 +44,8 @@ class _AdminScreenState extends State<AdminScreen> {
                   color: Colors.black,
                 ),
               ),
-              Text("Admin",
+              Text(
+                "Admin",
                 style: TextStyle(
                   color: Colors.black,
                   fontWeight: FontWeight.bold,
@@ -66,7 +65,7 @@ class _AdminScreenState extends State<AdminScreen> {
         onTap: (value) => {
           setState(() {
             _page = value;
-          })
+          }),
         },
         items: [
           // Posts

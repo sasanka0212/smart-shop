@@ -4,6 +4,7 @@ import 'package:amazon/common/widgets/bottom_bar.dart';
 import 'package:amazon/constraints/error_handling.dart';
 import 'package:amazon/constraints/global_variables.dart';
 import 'package:amazon/constraints/utils.dart';
+import 'package:amazon/features/auth/screens/auth_screen.dart';
 import 'package:amazon/models/user.dart';
 import 'package:amazon/providers/user_provider.dart';
 import 'package:flutter/material.dart';
@@ -112,6 +113,17 @@ class AuthServices {
         var userProvider = Provider.of<UserProvider>(context, listen: false);
         userProvider.setuser(userRes.body);
       }
+    } catch (e) {
+      showSnakBar(context, e.toString());
+    }
+  }
+
+  void logOut(BuildContext context) async {
+    try {
+      SharedPreferences sharedPreferences =
+          await SharedPreferences.getInstance();
+      await sharedPreferences.setString('x-auth-token', '');
+      Navigator.pushNamedAndRemoveUntil(context, AuthScreen.routeName, (route) => false);
     } catch (e) {
       showSnakBar(context, e.toString());
     }

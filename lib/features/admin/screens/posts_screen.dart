@@ -1,5 +1,5 @@
 import 'package:amazon/common/widgets/loader.dart';
-import 'package:amazon/features/accounts/screens/add_product_screen.dart';
+import 'package:amazon/features/admin/screens/add_product_screen.dart';
 import 'package:amazon/features/accounts/widgets/single_product.dart';
 import 'package:amazon/features/admin/services/admin_services.dart';
 import 'package:amazon/models/product.dart';

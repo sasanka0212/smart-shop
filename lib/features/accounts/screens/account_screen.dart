@@ -30,7 +30,7 @@ class _AccountScreenState extends State<AccountScreen> {
               Container(
                 alignment: Alignment.topLeft,
                 child: Image.asset(
-                  'assets/images/amazon_in.png',
+                  'assets/images/smart_shop.png',
                   height: 45,
                   width: 120,
                   color: Colors.black,
